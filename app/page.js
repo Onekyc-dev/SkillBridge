@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { courses } from "../lib/courses";
+import CourseBrowser from "../components/CourseBrowser";
 
 export default function Home() {
   return (
@@ -10,15 +10,7 @@ export default function Home() {
       </section>
       <section>
         <h2>Courses</h2>
-        <div className="grid">
-          {courses.map((c) => (
-            <Link key={c.slug} href={`/courses/${c.slug}`} className="card">
-              <h3>{c.title}</h3>
-              <p>{c.summary}</p>
-              <p className="muted">{c.level} · {c.duration} · {c.modules.length} modules</p>
-            </Link>
-          ))}
-        </div>
+        <CourseBrowser courses={courses} />
         <p className="muted">More courses are on the way.</p>
       </section>
     </>
