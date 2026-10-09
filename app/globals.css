@@ -178,3 +178,38 @@ a.btn { display: inline-block; text-decoration: none; text-align: center; }
   .course-card { transition: none; }
   .course-card:hover { transform: none; }
 }
+
+/* ---- Update 5: skill check, chips, longer courses ---- */
+.haveskill { margin: 2.5rem 0 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: .8rem; }
+.chip { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.2rem; border-radius: 999px; background: #fff; border: 1.5px solid var(--green); color: var(--green-deep); font-weight: 800; transition: transform .2s ease, background .2s ease; }
+.chip:hover, .chip:focus-visible { background: #EAF7EF; transform: translateY(-2px); }
+.chip:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+.skillpage .hero { padding-top: .5rem; }
+.skillpage .lead { color: var(--muted); font-size: 1.1rem; max-width: 44ch; }
+.skillpage .ctas, .actions { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1.2rem 0; }
+.score { font-family: var(--font-display), sans-serif; font-size: 3.6rem; font-weight: 800; color: var(--green-deep); line-height: 1; margin: .4rem 0 .8rem; }
+.safety { background: #FFF8E1; border: 1px solid #F0D58A; border-radius: 20px; padding: 1.1rem 1.2rem; margin: 1.5rem 0 0; }
+.safety h3 { margin: 0 0 .4rem; }
+.safety ul { margin: 0; padding-left: 1.1rem; }
+.safety li { margin: .25rem 0; }
+@media (prefers-reduced-motion: reduce) { .chip { transition: none; } .chip:hover { transform: none; } }
+.course > * { min-width: 0; }
+.diagram { min-width: 0; max-width: 100%; }
+.d-table { font-size: .95rem; }
+.d-table th, .d-table td { padding: .5rem .55rem; overflow-wrap: anywhere; }
+
+/* ---- Update 5: skill check, chips, longer courses ---- */
+.lead-text { color: var(--muted); font-size: 1.1rem; max-width: 46ch; margin: .5rem 0 1.2rem; }
+.skillbar { background: #FFF6DA; border: 1px solid #F1DC9A; border-radius: 22px; padding: 1.3rem; margin: 2.5rem 0 1rem; }
+.skillbar h2 { margin-bottom: .3rem; }
+.skillbar p { margin: 0 0 .9rem; color: #5B4A12; }
+.chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+.chip { display: inline-block; background: #fff; border: 1.5px solid #E7C969; color: #5B4A12; font-weight: 700; padding: .6rem 1rem; border-radius: 999px; transition: transform .2s ease, box-shadow .2s ease; }
+.chip:hover, .chip:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(91, 74, 18, .12); }
+.chip:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+.score-badge { width: 110px; height: 110px; margin: 0 auto 1rem; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-content: center; font: 800 2.4rem var(--font-display), sans-serif; line-height: 1; box-shadow: 0 0 0 10px rgba(30, 155, 87, .15); animation: pop .5s ease both; text-align: center; }
+.score-badge span { font-size: 1.1rem; opacity: .85; }
+.trust-note { color: var(--muted); margin: 1rem 0; }
+.row-btns { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1rem 0 2rem; }
+@media (prefers-reduced-motion: reduce) { .score-badge, .chip { animation: none !important; transition: none; } }

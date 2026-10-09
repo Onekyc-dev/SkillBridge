@@ -5,7 +5,6 @@ import { useSession, signIn } from "next-auth/react";
 import AdGate from "./AdGate";
 import Diagram from "./Diagram";
 import Quiz from "./Quiz";
-import { extras } from "../lib/extras";
 
 function Check() {
   return (
@@ -89,7 +88,7 @@ export default function CourseView({ course }) {
   }
 
   const m = course.modules[current];
-  const ex = (extras[course.slug] || [])[current] || {};
+  const ex = m;
   const nextMod = course.modules[current + 1];
   const pct = Math.round((done / total) * 100);
 
