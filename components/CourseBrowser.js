@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const TONES = { "Admin & Support": "sun", "Data & Research": "sky" };
+const TONES = { "Admin & Support": "sun", "Data & Research": "sky", "Writing & Content": "rose", "Customer Support": "mint" };
 
 function Icon({ category }) {
   const p = { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true" };
@@ -10,6 +10,10 @@ function Icon({ category }) {
     return <svg {...p}><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2" /></svg>;
   if (category === "Data & Research")
     return <svg {...p}><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 10h18M9 4v16" /></svg>;
+  if (category === "Writing & Content")
+    return <svg {...p}><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" /></svg>;
+  if (category === "Customer Support")
+    return <svg {...p}><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z" /></svg>;
   return <svg {...p}><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5" /></svg>;
 }
 

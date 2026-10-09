@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import JobCard from "./JobCard";
 import { useSession, signIn } from "next-auth/react";
 import AdGate from "./AdGate";
 import Diagram from "./Diagram";
@@ -76,10 +77,7 @@ export default function CourseView({ course }) {
         </div>
         <div className="grid">
           {course.jobs.map((j) => (
-            <a key={j.name} href={j.url} target="_blank" rel="noopener noreferrer" className="card">
-              <h3>{j.name}</h3>
-              <p>{j.note}</p>
-            </a>
+            <JobCard key={j.name} job={j} />
           ))}
         </div>
         <button className="btn ghost" onClick={() => openModule(0)}>Review the course</button>

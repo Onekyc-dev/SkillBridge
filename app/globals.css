@@ -213,3 +213,11 @@ a.btn { display: inline-block; text-decoration: none; text-align: center; }
 .trust-note { color: var(--muted); margin: 1rem 0; }
 .row-btns { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1rem 0 2rem; }
 @media (prefers-reduced-motion: reduce) { .score-badge, .chip { animation: none !important; transition: none; } }
+
+/* Update 6: job cards */
+.jobcard { display: flex; flex-direction: column; gap: .35rem; }
+.jobcard:hover { border-color: var(--line); }
+.job-tip { font-size: .95rem; color: var(--muted, #5b6b62); }
+.btn.small { align-self: flex-start; margin-top: .5rem; padding: .55rem 1rem; font-size: .95rem; }
+.tone-rose .c-icon { background: #FCE4E4; color: #9A2F2F; }
+.tone-mint .c-icon { background: #DDF3E6; color: #176B3A; }

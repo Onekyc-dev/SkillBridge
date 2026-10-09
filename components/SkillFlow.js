@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import JobCard from "./JobCard";
 import AdGate from "./AdGate";
 import { optionOrder } from "./Quiz";
 
@@ -112,10 +113,7 @@ export default function SkillFlow({ data }) {
           <h2>Where to look for {skill} work</h2>
           <div className="grid">
             {jobs.map((j) => (
-              <a key={j.name} href={j.url} target="_blank" rel="noopener noreferrer" className="card">
-                <h3>{j.name}</h3>
-                <p>{j.note}</p>
-              </a>
+              <JobCard key={j.name} job={j} />
             ))}
           </div>
           <p className="trust-note">Stay safe: real employers never ask you to pay to get a job, and keep payments on the platform.</p>
