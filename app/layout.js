@@ -19,9 +19,15 @@ export default function RootLayout({ children }) {
         <Providers>
           <header className="bar">
             <Link href="/" className="logo">SkillBridge</Link>
-            <AuthButton />
+            <nav className="nav">
+              <Link href="/#courses" className="nav-link">Courses</Link>
+              <AuthButton />
+            </nav>
           </header>
           <main className="wrap">{children}</main>
+          <footer className="foot">
+            <p><strong>SkillBridge</strong> · Free skills, honest job links.</p>
+          </footer>
         </Providers>
       </body>
     </html>

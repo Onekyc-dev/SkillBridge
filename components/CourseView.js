@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 import AdGate from "./AdGate";
 import Diagram from "./Diagram";
@@ -55,6 +56,7 @@ export default function CourseView({ course }) {
   if (status === "unauthenticated") {
     return (
       <section className="hero">
+        <Link href="/" className="back">&larr; All courses</Link>
         <h1>{course.title}</h1>
         <p>Sign in with Google to start this course and save your progress.</p>
         <button className="btn" onClick={() => signIn("google")}>Sign in with Google</button>
@@ -65,6 +67,7 @@ export default function CourseView({ course }) {
   if (current >= total) {
     return (
       <section className="stage">
+        <Link href="/" className="back">&larr; All courses</Link>
         <div className="celebrate" role="status">
           <div className="ring"><Check /></div>
           <h1 style={{ margin: "0 auto .5rem" }}>You finished {course.title}</h1>
@@ -93,6 +96,7 @@ export default function CourseView({ course }) {
   return (
     <div className="course">
       <aside>
+        <Link href="/" className="back">&larr; All courses</Link>
         <h2>{course.title}</h2>
         <div className="progress" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Course progress">
           <span style={{ width: `${pct}%` }} />

@@ -1,6 +1,14 @@
-Update 1 - replace these 4 files in your GitHub repo and add 1 new file:
+Update 4 - calm homepage, sticky header, back links
 
-REPLACE  lib/courses.js
+NEW      components/Hero.js
+NEW      components/Steps.js
+NEW      components/ContinueCard.js
+REPLACE  components/CourseBrowser.js
+REPLACE  components/CourseView.js
 REPLACE  app/page.js
+REPLACE  app/layout.js
 REPLACE  app/globals.css
-NEW      components/CourseBrowser.js
+
+New file: Add file > Create new file, type the path, paste, commit.
+Replace: open the file, tap the pencil, select all, paste, commit.
+Do the new files first, then the replaced ones.
