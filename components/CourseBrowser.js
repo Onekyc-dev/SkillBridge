@@ -17,9 +17,9 @@ function Icon({ category }) {
   return <svg {...p}><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5" /></svg>;
 }
 
-export default function CourseBrowser({ courses }) {
+export default function CourseBrowser({ courses, initialCat }) {
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState(initialCat && courses.some((c) => c.category === initialCat) ? initialCat : "All");
   const [level, setLevel] = useState("All");
   const [length, setLength] = useState("All");
 

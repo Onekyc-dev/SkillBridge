@@ -128,7 +128,7 @@ a { color: inherit; text-decoration: none; }
 .back:hover { text-decoration: underline; text-underline-offset: 3px; }
 a.btn { display: inline-block; text-decoration: none; text-align: center; }
 .foot { text-align: center; color: var(--muted); padding: 2rem 1.25rem 3rem; border-top: 1px solid var(--line); }
-#courses, #how { scroll-margin-top: 5rem; }
+#courses, #how, #have-skill { scroll-margin-top: 5rem; }
 
 .hero2 { padding: 1.25rem 0 1rem; }
 .hero2 h1 { max-width: 16ch; }
@@ -221,3 +221,45 @@ a.btn { display: inline-block; text-decoration: none; text-align: center; }
 .btn.small { align-self: flex-start; margin-top: .5rem; padding: .55rem 1rem; font-size: .95rem; }
 .tone-rose .c-icon { background: #FCE4E4; color: #9A2F2F; }
 .tone-mint .c-icon { background: #DDF3E6; color: #176B3A; }
+
+/* ---- Update 7: menu, my courses, info pages ---- */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.nav { position: relative; }
+.menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; background: #fff; border: 1.5px solid var(--green); border-radius: 14px; cursor: pointer; }
+.menu-btn:focus-visible, .sub-btn:focus-visible, .nav-link:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+.menu-ico, .menu-ico::before, .menu-ico::after { display: block; width: 20px; height: 2.5px; background: var(--green-deep); border-radius: 2px; content: ""; position: relative; }
+.menu-ico::before { position: absolute; top: -6px; }
+.menu-ico::after { position: absolute; top: 6px; }
+.menu { display: none; position: absolute; top: calc(100% + .6rem); right: 0; width: min(88vw, 320px); flex-direction: column; align-items: stretch; gap: .2rem; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: .8rem; box-shadow: 0 16px 36px rgba(20, 38, 27, .14); }
+.menu.open { display: flex; }
+.menu .nav-link { display: block; padding: .65rem .7rem; border-radius: 10px; text-align: left; background: none; border: 0; font: 700 1rem var(--font-body), sans-serif; cursor: pointer; color: var(--green-deep); width: 100%; }
+.menu .nav-link:hover { background: #EAF7EF; text-decoration: none; }
+.sub { display: none; list-style: none; margin: 0 0 .2rem .7rem; padding: 0 0 0 .6rem; border-left: 3px solid var(--sun); }
+.sub.open { display: block; }
+.sub a { display: block; padding: .5rem .6rem; border-radius: 8px; font-weight: 600; }
+.sub a:hover { background: #EAF7EF; }
+.menu-auth { padding: .6rem .3rem .2rem; border-top: 1px solid var(--line); margin-top: .4rem; }
+.menu-auth .btn { width: 100%; }
+@media (min-width: 960px) {
+  .menu-btn { display: none; }
+  .menu { display: flex; position: static; flex-direction: row; align-items: center; width: auto; border: 0; box-shadow: none; padding: 0; background: transparent; gap: .5rem; }
+  .menu .nav-link { width: auto; padding: .45rem .7rem; }
+  .has-sub { position: relative; }
+  .sub { position: absolute; top: 100%; left: 0; min-width: 220px; margin: .3rem 0 0; padding: .5rem; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 14px 30px rgba(20, 38, 27, .14); }
+  .menu-auth { border: 0; margin: 0; padding: 0 0 0 .4rem; }
+  .menu-auth .btn { width: auto; }
+}
+.foot-links { margin: .3rem 0 0; font-size: .95rem; }
+.foot-links a { color: var(--green-deep); font-weight: 700; }
+.foot-links a:hover { text-decoration: underline; }
+.empty-box { background: #fff; border: 1px dashed var(--line); border-radius: 20px; padding: 1.6rem; text-align: center; margin: 1rem 0; }
+.empty-box p { color: var(--muted); }
+.mc-line { margin: .6rem 0 .2rem; color: var(--muted); }
+.mc-go { font-weight: 800; color: var(--green-deep); }
+.prose h2 { margin-top: 1.8rem; }
+.flags { padding-left: 1.3rem; }
+.flags li { margin-bottom: .7rem; }
+.checklist { padding-left: 1.2rem; }
+.checklist li { margin-bottom: .45rem; }
+.inline-link { color: var(--green-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .menu-btn { transition: none; } }

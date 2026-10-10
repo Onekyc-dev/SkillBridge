@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Bricolage_Grotesque, Nunito } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-import AuthButton from "../components/AuthButton";
+import SiteNav from "../components/SiteNav";
+import { courses } from "../lib/courses";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display" });
 const body = Nunito({ subsets: ["latin"], variable: "--font-body" });
@@ -19,14 +20,12 @@ export default function RootLayout({ children }) {
         <Providers>
           <header className="bar">
             <Link href="/" className="logo">SkillBridge</Link>
-            <nav className="nav">
-              <Link href="/#courses" className="nav-link">Courses</Link>
-              <AuthButton />
-            </nav>
+            <SiteNav categories={[...new Set(courses.map((c) => c.category))]} />
           </header>
           <main className="wrap">{children}</main>
           <footer className="foot">
             <p><strong>SkillBridge</strong> · Free skills, honest job links.</p>
+            <p className="foot-links"><Link href="/about">About</Link> · <Link href="/safety">Scam safety</Link> · <Link href="/my-courses">My courses</Link></p>
           </footer>
         </Providers>
       </body>
