@@ -263,3 +263,159 @@ a.btn { display: inline-block; text-decoration: none; text-align: center; }
 .checklist li { margin-bottom: .45rem; }
 .inline-link { color: var(--green-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .menu-btn { transition: none; } }
+
+
+/* SkillBridge: friendly homepage design update */
+.hero2 {
+  padding: clamp(2rem, 5vw, 4rem) 0 2rem;
+}
+
+.hero2 .eyebrow {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: #E3F4E9;
+  color: #176B3A;
+  font-size: 0.78rem;
+  letter-spacing: 0.045em;
+}
+
+.hero2 h1 {
+  max-width: 14ch;
+  margin-bottom: 1rem;
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: #173D2A;
+}
+
+.hero2 .lead {
+  max-width: 43ch;
+  margin: 0 0 1.4rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.hero2 .ctas {
+  gap: 0.85rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.hero2 .ctas .btn {
+  padding: 0.85rem 1.45rem;
+  font-size: 1rem;
+  box-shadow: 0 5px 14px rgba(23, 107, 58, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.hero2 .ctas .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px rgba(23, 107, 58, 0.18);
+}
+
+.hero2 .ctas .btn.ghost {
+  background: #F0ECFF;
+  border-color: #D9D0FF;
+  color: #5943A1;
+  box-shadow: none;
+}
+
+.hero2 .ctas .btn.ghost:hover {
+  background: #E6DFFF;
+}
+
+.hero-art {
+  border-radius: 24px;
+  margin-top: 0.5rem;
+}
+
+#courses {
+  margin-top: 2.5rem;
+  scroll-margin-top: 6rem;
+}
+
+#courses > h2,
+#have-skill > h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+.continue {
+  gap: 1.25rem;
+  padding: 1.3rem;
+  margin: 1rem 0 2rem;
+  border-radius: 24px;
+  box-shadow: 0 6px 22px rgba(20, 38, 27, 0.04);
+}
+
+.skillbar {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: 24px;
+}
+
+.card,
+.course-card,
+.step {
+  border-radius: 22px;
+  box-shadow: 0 5px 18px rgba(20, 38, 27, 0.035);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover,
+.course-card:hover,
+.step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(20, 38, 27, 0.08);
+}
+
+.btn:focus-visible,
+.card:focus-visible,
+.course-card:focus-visible {
+  outline: 3px solid #B8A8FF;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .hero2 {
+    padding-top: 1.75rem;
+  }
+
+  .hero2 h1 {
+    max-width: 12ch;
+    font-size: clamp(2.35rem, 10vw, 3.2rem);
+  }
+
+  .hero2 .ctas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .hero2 .ctas .btn {
+    width: 100%;
+  }
+
+  .continue {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero2 .ctas .btn,
+  .card,
+  .course-card,
+  .step {
+    transition: none;
+  }
+
+  .hero2 .ctas .btn:hover,
+  .card:hover,
+  .course-card:hover,
+  .step:hover {
+    transform: none;
+  }
+}
