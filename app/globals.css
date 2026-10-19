@@ -425,3 +425,79 @@ body {
   .continue-course-card, .dashboard-course-row { transition: none; }
   .continue-course-card:hover { transform: none; }
 }
+
+/* SKILLBRIDGE HOMEPAGE HERO REFRESH */
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 3.6rem);
+  padding: clamp(2.1rem, 5vw, 4.5rem) 0 clamp(2.4rem, 4vw, 3.7rem);
+  overflow: hidden;
+}
+.home-hero-copy { position: relative; z-index: 2; min-width: 0; }
+.home-hero-kicker { display: flex; align-items: center; gap: .55rem; color: var(--green-deep); font-size: .78rem; font-weight: 850; letter-spacing: .13em; margin: 0 0 1rem; }
+.home-hero-kicker-dot { width: .58rem; height: .58rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px rgba(35,134,91,.12); }
+.home-hero h1 { max-width: 12ch; margin: 0; color: #17382d; font-size: clamp(2.65rem, 5.2vw, 4.65rem); font-weight: 850; letter-spacing: -.055em; line-height: .99; }
+.home-hero h1 span { color: var(--green); }
+.home-hero-lead { max-width: 43ch; margin: 1.35rem 0 0; color: #52675d; font-size: clamp(1rem, 1.35vw, 1.13rem); line-height: 1.75; }
+.home-hero-actions { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; margin: 1.6rem 0 1.8rem; }
+.home-hero-primary, .home-hero-secondary { display: inline-flex; min-height: 3.35rem; align-items: center; justify-content: center; gap: .7rem; border-radius: 999px; padding: .82rem 1.25rem; font-weight: 800; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.home-hero-primary { color: white; background: linear-gradient(135deg, #23865b, #146343); box-shadow: 0 10px 22px rgba(21,86,61,.18); }
+.home-hero-secondary { color: #15563d; background: rgba(255,254,252,.8); border: 1px solid #b7d8c2; }
+.home-hero-primary:hover, .home-hero-secondary:hover { transform: translateY(-2px); }
+.home-hero-primary svg { width: 1.2rem; height: 1.2rem; }
+.home-hero-secondary svg { width: 1.25rem; height: 1.25rem; }
+.home-hero-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; max-width: 39rem; padding-top: 1.2rem; border-top: 1px solid rgba(122,157,134,.25); }
+.home-hero-benefit { display: flex; align-items: flex-start; gap: .55rem; min-width: 0; }
+.home-hero-benefit-icon { display: grid; flex: 0 0 2.25rem; width: 2.25rem; height: 2.25rem; place-items: center; color: #188254; background: #e2f1e3; border-radius: .8rem; }
+.home-hero-benefit-icon svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.home-hero-benefit strong, .home-hero-benefit small { display: block; }
+.home-hero-benefit strong { color: #244538; font-size: .76rem; line-height: 1.35; }
+.home-hero-benefit small { margin-top: .18rem; color: #6a7c71; font-size: .69rem; line-height: 1.35; }
+.home-hero-visual { position: relative; min-width: 0; padding: .5rem .15rem 1.2rem; animation: homeHeroFloatIn .8s ease both; }
+.home-hero-visual-glow { position: absolute; inset: 8% 2% 4% 7%; z-index: -1; border-radius: 48% 42% 45% 35%; background: radial-gradient(ellipse at 35% 28%, rgba(220,201,243,.78), transparent 48%), radial-gradient(ellipse at 72% 70%, rgba(174,219,178,.8), transparent 52%); filter: blur(10px); }
+.home-hero-image-frame { overflow: hidden; border-radius: 2.2rem 2.2rem 4.6rem 2.2rem; box-shadow: 0 24px 58px rgba(43,76,55,.14); transform: rotate(.4deg); }
+.home-hero-image { display: block; width: 100%; height: auto; aspect-ratio: 836 / 642; object-fit: cover; }
+.home-hero-float-card { position: absolute; z-index: 2; display: flex; align-items: center; gap: .65rem; padding: .75rem .95rem; border: 1px solid rgba(255,255,255,.88); border-radius: 1rem; background: rgba(255,254,252,.92); box-shadow: 0 12px 30px rgba(37,64,47,.12); backdrop-filter: blur(12px); animation: homeHeroBob 5s ease-in-out infinite; }
+.home-hero-float-top { top: 8%; right: -1%; }
+.home-hero-float-bottom { bottom: 7%; left: -4%; animation-delay: -2.5s; }
+.home-hero-float-card strong, .home-hero-float-card small { display: block; white-space: nowrap; }
+.home-hero-float-card strong { color: #234738; font-size: .78rem; }
+.home-hero-float-card small { color: #708177; font-size: .68rem; margin-top: .15rem; }
+.home-hero-float-check, .home-hero-float-spark { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: .75rem; background: #e2f1e3; color: #188254; }
+.home-hero-float-check svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.home-hero-float-spark { color: #7855a7; background: #f0e6fa; font-size: 1.35rem; }
+@keyframes homeHeroBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes homeHeroFloatIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 900px) {
+  .home-hero { grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); gap: 1.4rem; }
+  .home-hero h1 { font-size: clamp(2.45rem, 5vw, 3.6rem); }
+  .home-hero-float-top { right: -2%; }
+  .home-hero-float-bottom { left: -2%; }
+}
+@media (max-width: 700px) {
+  .home-hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
+  .home-hero h1 { max-width: 11ch; font-size: clamp(2.7rem, 12vw, 4rem); }
+  .home-hero-lead { font-size: 1rem; }
+  .home-hero-actions { gap: .6rem; }
+  .home-hero-primary, .home-hero-secondary { min-height: 3.15rem; padding: .75rem 1rem; font-size: .92rem; }
+  .home-hero-benefits { gap: .45rem; }
+  .home-hero-benefit { flex-direction: column; gap: .4rem; }
+  .home-hero-benefit strong { font-size: .74rem; }
+  .home-hero-benefit small { font-size: .68rem; }
+  .home-hero-visual { margin: .1rem .2rem 0; padding: .2rem 0 1.25rem; }
+  .home-hero-image-frame { border-radius: 1.5rem 1.5rem 3rem 1.5rem; }
+  .home-hero-float-card { padding: .6rem .7rem; gap: .45rem; }
+  .home-hero-float-card strong { font-size: .68rem; }
+  .home-hero-float-card small { font-size: .61rem; }
+  .home-hero-float-check, .home-hero-float-spark { width: 1.8rem; height: 1.8rem; }
+  .home-hero-float-top { top: 4%; right: -2%; }
+  .home-hero-float-bottom { bottom: 3%; left: -2%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-visual, .home-hero-float-card { animation: none; }
+  .home-hero-primary, .home-hero-secondary { transition: none; }
+}
