@@ -1,4 +1,3 @@
-
 import { courses } from "../../lib/courses";
 import Dashboard from "../../components/Dashboard";
 
