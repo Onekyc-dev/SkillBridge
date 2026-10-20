@@ -501,3 +501,38 @@ body {
   .home-hero-visual, .home-hero-float-card { animation: none; }
   .home-hero-primary, .home-hero-secondary { transition: none; }
 }
+
+/* SkillBridge learning stages, assessments, résumé and certificates */
+.quiz-question { min-width: 0; margin: 1rem 0 1.2rem; padding: 0; border: 0; }
+.quiz-question legend { width: 100%; margin-bottom: .65rem; line-height: 1.55; }
+.quiz-choice { display: flex; align-items: flex-start; gap: .65rem; }
+.quiz-choice input { flex: 0 0 auto; margin-top: .28rem; accent-color: var(--green); }
+.quiz-choice span { flex: 1; }
+.quiz-question:disabled { opacity: 1; }
+.quiz .btn:disabled, .course .btn:disabled { opacity: .5; cursor: not-allowed; }
+.practical-label { display: block; margin: 1rem 0 .45rem; font-weight: 800; }
+.practical-textarea { display: block; width: 100%; margin: .45rem 0 1rem; padding: .85rem 1rem; border: 1px solid #C9D8CC; border-radius: 13px; background: #FFFEFC; color: #20392B; font: inherit; line-height: 1.6; }
+.practical-textarea:focus { outline: 3px solid rgba(30, 155, 87, .2); border-color: var(--green); }
+.button-row, .dashboard-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; }
+.dashboard-actions { justify-content: flex-end; }
+.certificate-paper { max-width: 850px; margin: 1.5rem auto; padding: clamp(1.5rem, 5vw, 4rem); text-align: center; border: 8px double #B7CBAE; border-radius: 10px; background: linear-gradient(135deg, #FFFEFC, #F3F8EF); box-shadow: 0 12px 36px rgba(32, 57, 43, .08); }
+.certificate-paper h1 { margin: .6rem 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); color: #1C5137; }
+.certificate-paper h2 { margin: 1rem 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.certificate-paper h3 { margin: .7rem 0; font-size: clamp(1.3rem, 3vw, 2rem); }
+.certificate-date { margin-top: 1.5rem; font-weight: 800; }
+.certificate-id { font-size: .8rem; overflow-wrap: anywhere; }
+.certificate-list { display: grid; gap: .8rem; margin-top: .8rem; }
+.certificate-mini, .resume-record { display: grid; gap: .35rem; padding: .9rem; border: 1px solid #D8E2D8; border-radius: 14px; background: #F7F9F4; }
+.certificate-mini small { color: #52675D; overflow-wrap: anywhere; }
+.resume-page { max-width: 950px; }
+.resume-editor { display: grid; gap: .35rem; }
+.resume-record + .resume-record { margin-top: .7rem; }
+.resume-record h3 { margin: 0; }
+.resume-record p { margin: .2rem 0; }
+@media print {
+  body { background: white !important; }
+  .bar, .foot, .back, .btn, .dashboard-actions, .resume-editor { display: none !important; }
+  .wrap { max-width: none !important; padding: 0 !important; }
+  .certificate-paper { box-shadow: none; break-inside: avoid; }
+  .resume-page { max-width: none; }
+}

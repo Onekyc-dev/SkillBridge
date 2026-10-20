@@ -21,7 +21,7 @@ export default function Home() {
       <section id="courses" className="scroll-rise">
         <h2>Courses</h2>
         <CourseBrowser courses={cards} />
-        <p className="muted">More courses are on the way.</p>
+        <p className="muted">Explore all nine beginner-friendly courses and keep building practical skills.</p>
       </section>
       <section id="have-skill" className="skillbar scroll-rise">
         <h2>Already have a skill?</h2>

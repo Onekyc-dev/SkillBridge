@@ -19,11 +19,14 @@ function Icon({ name }) {
 
 export default function Dashboard({ courses = [] }) {
   const [progress, setProgress] = useState(null);
+  const [learningData, setLearningData] = useState({});
 
   useEffect(() => {
     const loadProgress = () => {
       const values = {};
+      const learningValues = {};
       for (const course of courses) {
+        try { learningValues[course.slug] = JSON.parse(localStorage.getItem(`sb-learning-${course.slug}`) || "{}"); } catch { learningValues[course.slug] = {}; }
         let count = 0;
         try {
           const raw = localStorage.getItem(`sb-progress-${course.slug}`);
@@ -40,6 +43,7 @@ export default function Dashboard({ courses = [] }) {
         values[course.slug] = Math.max(0, Math.min(course.moduleCount || 0, Number.isFinite(count) ? count : 0));
       }
       setProgress(values);
+      setLearningData(learningValues);
     };
     loadProgress();
     window.addEventListener("focus", loadProgress);
@@ -52,12 +56,13 @@ export default function Dashboard({ courses = [] }) {
 
   if (!progress) return <section className="stage dashboard-page"><p className="muted">Loading your learning dashboard…</p></section>;
 
-  const started = courses.filter((course) => progress[course.slug] > 0);
-  const completed = courses.filter((course) => course.moduleCount > 0 && progress[course.slug] >= course.moduleCount);
+  const started = courses.filter((course) => progress[course.slug] > 0 || (learningData[course.slug]?.practicalDone || []).length > 0);
+  const completed = courses.filter((course) => course.moduleCount > 0 && progress[course.slug] >= course.moduleCount && (learningData[course.slug]?.practicalDone || []).length >= 3 && Boolean(learningData[course.slug]?.examPassed));
+  const certificates = courses.filter((course) => learningData[course.slug]?.certificate && learningData[course.slug]?.examPassed);
   const modulesDone = courses.reduce((total, course) => total + progress[course.slug], 0);
   const totalModules = courses.reduce((total, course) => total + (course.moduleCount || 0), 0);
   const skills = [...new Set(completed.map((course) => course.category).filter(Boolean))];
-  const current = started.find((course) => progress[course.slug] < course.moduleCount) || started[0];
+  const current = started.find((course) => { const data = learningData[course.slug] || {}; return !(progress[course.slug] >= course.moduleCount && (data.practicalDone || []).length >= 3 && data.examPassed); }) || started[0];
 
   const stats = [
     { key: "started", label: "Courses started", value: started.length, note: "Courses you've begun", tone: "mint" },
@@ -69,7 +74,7 @@ export default function Dashboard({ courses = [] }) {
   return <section className="stage dashboard-page">
     <div className="dashboard-heading">
       <div><p className="dashboard-kicker">YOUR SKILLBRIDGE SPACE</p><h1>Your learning dashboard</h1><p className="dashboard-intro">See your progress, keep learning, and take your next career step.</p></div>
-      <Link href="/courses" className="btn">Explore courses <Icon name="arrow" /></Link>
+      <div className="dashboard-actions"><Link href="/resume" className="btn ghost">My résumé</Link><Link href="/courses" className="btn">Explore courses <Icon name="arrow" /></Link></div>
     </div>
 
     <div className="dashboard-stats" aria-label="Learning statistics">
@@ -84,19 +89,22 @@ export default function Dashboard({ courses = [] }) {
         <div className="panel-heading"><div><p className="dashboard-kicker">PICK UP WHERE YOU LEFT OFF</p><h2>Continue learning</h2></div><Link href="/my-courses" className="text-link">My courses <Icon name="arrow" /></Link></div>
         {current ? <Link href={`/courses/${current.slug}`} className="continue-course-card">
           <div className="continue-course-art" aria-hidden="true"><Icon name="learn" /></div>
-          <div className="continue-course-content"><span className="level-pill">{current.level || "Basic"}</span><h3>{current.title}</h3><p>{current.category || "Skill development"} · {progress[current.slug]} of {current.moduleCount} modules</p>
-            <div className="progress" role="progressbar" aria-label={`${current.title} progress`} aria-valuenow={current.moduleCount ? Math.round(progress[current.slug] / current.moduleCount * 100) : 0} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${current.moduleCount ? Math.round(progress[current.slug] / current.moduleCount * 100) : 0}%` }} /></div>
-            <strong className="continue-link">{progress[current.slug] >= current.moduleCount ? "Review course" : "Continue course"} <Icon name="arrow" /></strong>
+          <div className="continue-course-content"><span className="level-pill">{current.level || "Basic"}</span><h3>{current.title}</h3><p>{current.category || "Skill development"} · {progress[current.slug]} of {current.moduleCount} Basic Skills modules</p>
+            <div className="progress" role="progressbar" aria-label={`${current.title} Basic Skills progress`} aria-valuenow={current.moduleCount ? Math.round(progress[current.slug] / current.moduleCount * 100) : 0} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${current.moduleCount ? Math.round(progress[current.slug] / current.moduleCount * 100) : 0}%` }} /></div>
+            <strong className="continue-link">Continue course <Icon name="arrow" /></strong>
           </div>
         </Link> : <div className="dashboard-empty"><div className="empty-illustration"><Icon name="learn" /></div><h3>Your learning journey starts here</h3><p>Choose a course and start building practical skills. Your progress will appear here.</p><Link href="/courses" className="btn">Find your first course</Link></div>}
 
         <div className="panel-heading dashboard-subheading"><div><p className="dashboard-kicker">YOUR JOURNEY</p><h2>Your courses</h2></div></div>
         <div className="dashboard-course-list">{courses.map((course) => {
           const done = progress[course.slug] || 0;
-          const pct = course.moduleCount ? Math.round(done / course.moduleCount * 100) : 0;
+          const data = learningData[course.slug] || {};
+          const practicalDone = Array.isArray(data.practicalDone) ? data.practicalDone.length : 0;
+          const basicPct = course.moduleCount ? done / course.moduleCount : 0;
+          const pct = Math.round(basicPct * 50 + Math.min(practicalDone, 3) / 3 * 30 + (data.examPassed ? 20 : 0));
           return <Link key={course.slug} href={`/courses/${course.slug}`} className="dashboard-course-row">
-            <span className="course-row-mark"><Icon name={done >= course.moduleCount && course.moduleCount ? "completed" : "learn"} /></span>
-            <span className="course-row-copy"><strong>{course.title}</strong><small>{done} of {course.moduleCount} modules · {course.level || "Basic"}</small><span className="progress"><span style={{ width: `${pct}%` }} /></span></span>
+            <span className="course-row-mark"><Icon name={pct >= 100 ? "completed" : "learn"} /></span>
+            <span className="course-row-copy"><strong>{course.title}</strong><small>Basic {done}/{course.moduleCount} · Practical {practicalDone}/3 · Exam {data.examPassed ? "passed" : "not passed"} · {course.level || "Basic"}</small><span className="progress"><span style={{ width: `${pct}%` }} /></span></span>
             <strong className="course-row-pct">{pct}%</strong>
           </Link>;
         })}</div>
@@ -104,8 +112,8 @@ export default function Dashboard({ courses = [] }) {
 
       <aside className="dashboard-side">
         <section className="dashboard-panel skills-panel"><div className="side-title-icon mint-icon"><Icon name="skills" /></div><p className="dashboard-kicker">GROW YOUR PROFILE</p><h2>My skill areas</h2><p className="dashboard-description">Skills linked to courses you've completed.</p>{skills.length ? <div className="skill-tags">{skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div> : <div className="soft-empty">Your skill areas will appear as you complete courses.</div>}<Link href="/courses" className="text-link">Explore courses <Icon name="arrow" /></Link></section>
-        <section className="dashboard-panel certificate-panel"><div className="side-title-icon lilac-icon"><Icon name="certificate" /></div><p className="dashboard-kicker">YOUR ACHIEVEMENTS</p><h2>My certificates</h2><p className="dashboard-description">Certificates will appear here once certificate generation and course assessment are implemented.</p><span className="coming-label">Planned for a future update</span></section>
-        <section className="dashboard-panel career-panel"><div className="side-title-icon peach-icon"><Icon name="career" /></div><p className="dashboard-kicker">YOUR NEXT CHAPTER</p><h2>Turn your skills into opportunities</h2><p className="dashboard-description">Build towards your career goals with skill resources and job links.</p><Link href="/skills" className="btn btn-soft">Explore job links by skill</Link></section>
+        <section className="dashboard-panel certificate-panel"><div className="side-title-icon lilac-icon"><Icon name="certificate" /></div><p className="dashboard-kicker">YOUR ACHIEVEMENTS</p><h2>My certificates</h2><p className="dashboard-description">Certificates are available after both stages and the final exam are complete.</p>{certificates.length ? <div className="certificate-list">{certificates.map((course) => <article className="certificate-mini" key={course.slug}><strong>{course.title}</strong><small>Completed {new Date(learningData[course.slug].certificate.completedAt).toLocaleDateString()}</small><small>ID: {learningData[course.slug].certificate.id}</small><Link className="text-link" href={`/certificates/${course.slug}`}>View certificate →</Link></article>)}</div> : <span className="coming-label">Complete both stages and pass a final exam to earn your first certificate.</span>}</section>
+        <section className="dashboard-panel career-panel"><div className="side-title-icon peach-icon"><Icon name="career" /></div><p className="dashboard-kicker">YOUR NEXT CHAPTER</p><h2>Turn your skills into opportunities</h2><p className="dashboard-description">Build towards your career goals with skill resources and job links.</p><Link href="/skills" className="btn btn-soft">Explore job links by skill</Link><p><Link href="/resume" className="text-link">Build my résumé →</Link></p></section>
       </aside>
     </div>
     <p className="dashboard-storage-note">Your learning progress is currently saved in this browser on this device. It does not yet sync across devices.</p>
