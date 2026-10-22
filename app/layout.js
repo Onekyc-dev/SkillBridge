@@ -20,6 +20,9 @@ const body = Nunito({
 export const metadata = {
   title: "SkillBridge",
   description: "Learn a skill, then see where to apply for work that fits it.",
+  other: {
+    "google-adsense-account": "ca-pub-8309562936855759",
+  },
 };
 
 export default function RootLayout({ children }) {
