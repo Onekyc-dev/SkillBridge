@@ -1,12 +1,15 @@
 import { courses } from "../../lib/courses";
 import Dashboard from "../../components/Dashboard";
+import { requireAuth } from "../../lib/requireAuth";
 
 export const metadata = {
   title: "My Dashboard | SkillBridge",
   description: "Track your learning progress and career next steps.",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  await requireAuth("/dashboard");
+
   const courseCards = courses.map((course) => ({
     slug: course.slug,
     title: course.title,
