@@ -536,3 +536,167 @@ body {
   .certificate-paper { box-shadow: none; break-inside: avoid; }
   .resume-page { max-width: none; }
 }
+
+/* SkillBridge branded sign-in page */
+.signin-page {
+  width: 100%;
+  max-width: 1080px;
+  margin: 1.25rem auto 2.5rem;
+}
+.signin-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+  overflow: hidden;
+  min-height: 570px;
+  background: #fff;
+  border: 1px solid #DDE8DF;
+  border-radius: 28px;
+  box-shadow: 0 22px 65px rgba(20, 58, 37, .10);
+}
+.signin-visual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 570px;
+  overflow: hidden;
+  background: #F1EAF8;
+}
+.signin-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.signin-visual-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 2rem 2.1rem 2.25rem;
+  color: #123B2A;
+  background: linear-gradient(0deg, rgba(248, 252, 246, .98), rgba(248, 252, 246, .86) 70%, rgba(248, 252, 246, 0));
+}
+.signin-kicker {
+  display: inline-block;
+  margin-bottom: .7rem;
+  color: #147344;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+.signin-visual-copy h1 {
+  max-width: 15ch;
+  margin: 0 0 .65rem;
+  color: #123B2A;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.05;
+}
+.signin-visual-copy p {
+  max-width: 40ch;
+  margin: 0;
+  color: #456454;
+  font-size: 1rem;
+}
+.signin-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  background: #fff;
+}
+.signin-brand {
+  margin-bottom: 3.4rem;
+  color: #0E5A33;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: -.06em;
+}
+.signin-brand span { color: #1E9B57; }
+.signin-welcome {
+  margin-bottom: .65rem;
+  color: #1E9B57;
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+.signin-panel h2 {
+  margin: 0 0 .7rem;
+  color: #14261B;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  line-height: 1.12;
+}
+.signin-description {
+  margin: 0 0 2rem;
+  color: #5B6F63;
+  font-size: 1rem;
+}
+.signin-google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+  width: 100%;
+  min-height: 58px;
+  padding: .85rem 1rem;
+  border: 1px solid #D6E2D9;
+  border-radius: 15px;
+  background: #fff;
+  color: #173D2A;
+  font: 800 1rem var(--font-body), system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(20, 58, 37, .06);
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.signin-google-button:hover:not(:disabled) {
+  border-color: #1E9B57;
+  box-shadow: 0 9px 22px rgba(20, 58, 37, .11);
+  transform: translateY(-1px);
+}
+.signin-google-button:focus-visible {
+  outline: 3px solid #FFD166;
+  outline-offset: 3px;
+}
+.signin-google-button:disabled { opacity: .7; cursor: wait; }
+.google-mark { width: 21px; height: 21px; flex: none; }
+.signin-button-arrow { margin-left: auto; color: #1E9B57; font-size: 1.2rem; }
+.signin-divider {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: 1.8rem 0 1rem;
+  color: #819187;
+  font-size: .78rem;
+  white-space: nowrap;
+}
+.signin-divider::before, .signin-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #E6EEE8;
+}
+.signin-small-print, .signin-help {
+  margin: 0;
+  color: #748379;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+.signin-help { margin-top: 1.25rem; color: #456454; }
+.signin-loading {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  color: #5B6F63;
+}
+@media (max-width: 760px) {
+  .signin-page { margin: .5rem auto 1.5rem; }
+  .signin-card { grid-template-columns: 1fr; border-radius: 22px; }
+  .signin-visual { min-height: 300px; }
+  .signin-visual-copy { padding: 1.5rem 1.4rem 1.6rem; }
+  .signin-visual-copy h1 { font-size: 2rem; }
+  .signin-panel { padding: 2rem 1.4rem 2.2rem; }
+  .signin-brand { margin-bottom: 2rem; }
+}
