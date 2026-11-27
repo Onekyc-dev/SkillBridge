@@ -33,7 +33,7 @@ const PRACTICALS = {
 function readLearning(key, total) {
   try {
     const saved = JSON.parse(localStorage.getItem(key) || "null");
-    if (saved && typeof saved === "object") return { basicDone: Math.min(total, Math.max(0, Number(saved.basicDone) || 0)), practicalDone: Array.isArray(saved.practicalDone) ? saved.practicalDone : [], examPassed: Boolean(saved.examPassed), examAttempts: Number(saved.examAttempts) || 0, certificate: saved.certificate || null };
+    if (saved && typeof saved === "object") return { basicDone: Math.min(total, Math.max(0, Number(saved.basicDone) || 0)), practicalDone: Array.isArray(saved.practicalDone) ? saved.practicalDone : [], examPassed: Boolean(saved.examPassed), examAttempts: Number(saved.examAttempts) || 0, certificate: saved.certificate || null, lastActivityAt: saved.lastActivityAt || "" };
     const legacy = Number(localStorage.getItem(key.replace("learning", "progress")) || 0);
     return { basicDone: Math.min(total, Math.max(0, legacy)), practicalDone: [], examPassed: false, examAttempts: 0, certificate: null };
   } catch { return { basicDone: 0, practicalDone: [], examPassed: false, examAttempts: 0, certificate: null }; }
@@ -71,9 +71,11 @@ export default function CourseView({ course }) {
   }, [key, total, course.slug]);
 
   function saveLearning(next) {
-    setLearning(next);
+    const updated = { ...next, lastActivityAt: new Date().toISOString() };
+    setLearning(updated);
     try {
-      localStorage.setItem(key, JSON.stringify(next));
+      localStorage.setItem(key, JSON.stringify(updated));
+      localStorage.setItem(`sb-activity-${course.slug}`, updated.lastActivityAt);
       localStorage.setItem(`sb-progress-${course.slug}`, String(next.basicDone));
     } catch {}
   }
@@ -104,7 +106,13 @@ export default function CourseView({ course }) {
   function savePractical(index, text) {
     const next = { ...practicalAnswers, [index]: text };
     setPracticalAnswers(next);
-    try { localStorage.setItem(`sb-practical-work-${course.slug}`, JSON.stringify(next)); } catch {}
+    try {
+      localStorage.setItem(`sb-practical-work-${course.slug}`, JSON.stringify(next));
+      const activityAt = new Date().toISOString();
+      localStorage.setItem(`sb-activity-${course.slug}`, activityAt);
+      const saved = JSON.parse(localStorage.getItem(key) || "{}");
+      localStorage.setItem(key, JSON.stringify({ ...saved, lastActivityAt: activityAt }));
+    } catch {}
   }
   function completePractical(index) {
     if (!(practicalAnswers[index] || "").trim()) { setQuizFeedback("Please write your response before marking this project complete."); return; }

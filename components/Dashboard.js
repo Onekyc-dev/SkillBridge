@@ -20,13 +20,16 @@ function Icon({ name }) {
 export default function Dashboard({ courses = [] }) {
   const [progress, setProgress] = useState(null);
   const [learningData, setLearningData] = useState({});
+  const [activityData, setActivityData] = useState({});
 
   useEffect(() => {
     const loadProgress = () => {
       const values = {};
       const learningValues = {};
+      const activityValues = {};
       for (const course of courses) {
         try { learningValues[course.slug] = JSON.parse(localStorage.getItem(`sb-learning-${course.slug}`) || "{}"); } catch { learningValues[course.slug] = {}; }
+        try { activityValues[course.slug] = localStorage.getItem(`sb-activity-${course.slug}`) || learningValues[course.slug]?.lastActivityAt || ""; } catch { activityValues[course.slug] = ""; }
         let count = 0;
         try {
           const raw = localStorage.getItem(`sb-progress-${course.slug}`);
@@ -44,6 +47,7 @@ export default function Dashboard({ courses = [] }) {
       }
       setProgress(values);
       setLearningData(learningValues);
+      setActivityData(activityValues);
     };
     loadProgress();
     window.addEventListener("focus", loadProgress);
@@ -62,6 +66,19 @@ export default function Dashboard({ courses = [] }) {
   const modulesDone = courses.reduce((total, course) => total + progress[course.slug], 0);
   const totalModules = courses.reduce((total, course) => total + (course.moduleCount || 0), 0);
   const skills = [...new Set(completed.map((course) => course.category).filter(Boolean))];
+  const recentActivity = courses
+    .map((course) => ({
+      ...course,
+      activityAt: activityData[course.slug] || learningData[course.slug]?.lastActivityAt || "",
+      done: progress[course.slug] || 0,
+      practicalDone: Array.isArray(learningData[course.slug]?.practicalDone)
+        ? learningData[course.slug].practicalDone.length
+        : 0,
+      examPassed: Boolean(learningData[course.slug]?.examPassed),
+    }))
+    .filter((course) => course.activityAt)
+    .sort((a, b) => new Date(b.activityAt).getTime() - new Date(a.activityAt).getTime())
+    .slice(0, 4);
   const current = started.find((course) => { const data = learningData[course.slug] || {}; return !(progress[course.slug] >= course.moduleCount && (data.practicalDone || []).length >= 3 && data.examPassed); }) || started[0];
 
   const stats = [
@@ -74,7 +91,7 @@ export default function Dashboard({ courses = [] }) {
   return <section className="stage dashboard-page">
     <div className="dashboard-heading">
       <div><p className="dashboard-kicker">YOUR SKILLBRIDGE SPACE</p><h1>Your learning dashboard</h1><p className="dashboard-intro">See your progress, keep learning, and take your next career step.</p></div>
-      <div className="dashboard-actions"><Link href="/resume" className="btn ghost">My résumé</Link><Link href="/courses" className="btn">Explore courses <Icon name="arrow" /></Link></div>
+      <div className="dashboard-actions"><Link href="/resume" className="btn ghost">My résumé</Link><Link href="/portfolio" className="btn ghost">My portfolio</Link><Link href="/courses" className="btn">Explore courses <Icon name="arrow" /></Link></div>
     </div>
 
     <div className="dashboard-stats" aria-label="Learning statistics">
@@ -108,12 +125,38 @@ export default function Dashboard({ courses = [] }) {
             <strong className="course-row-pct">{pct}%</strong>
           </Link>;
         })}</div>
+      <section className="dashboard-panel activity-panel">
+        <div className="panel-heading">
+          <div><p className="dashboard-kicker">YOUR LATEST STEPS</p><h2>Recent learning activity</h2></div>
+        </div>
+        {recentActivity.length ? (
+          <div className="activity-list">
+            {recentActivity.map((course) => (
+              <Link href={`/courses/${course.slug}`} className="activity-row" key={course.slug}>
+                <span className="activity-dot" aria-hidden="true" />
+                <span className="activity-copy">
+                  <strong>{course.title}</strong>
+                  <small>{course.done} of {course.moduleCount} lessons · {course.practicalDone} of 3 projects · {course.examPassed ? "Exam passed" : "Exam pending"}</small>
+                  <small className="activity-date">{new Date(course.activityAt).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}</small>
+                </span>
+                <span className="activity-open">Open →</span>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="activity-empty">
+            <h3>Your activity will appear here</h3>
+            <p>When you complete a lesson or save practical work, your latest learning steps will show here.</p>
+            <Link href="/courses" className="text-link">Choose a course →</Link>
+          </div>
+        )}
+      </section>
       </section>
 
       <aside className="dashboard-side">
         <section className="dashboard-panel skills-panel"><div className="side-title-icon mint-icon"><Icon name="skills" /></div><p className="dashboard-kicker">GROW YOUR PROFILE</p><h2>My skill areas</h2><p className="dashboard-description">Skills linked to courses you've completed.</p>{skills.length ? <div className="skill-tags">{skills.map((skill) => <span className="skill-tag" key={skill}>{skill}</span>)}</div> : <div className="soft-empty">Your skill areas will appear as you complete courses.</div>}<Link href="/courses" className="text-link">Explore courses <Icon name="arrow" /></Link></section>
         <section className="dashboard-panel certificate-panel"><div className="side-title-icon lilac-icon"><Icon name="certificate" /></div><p className="dashboard-kicker">YOUR ACHIEVEMENTS</p><h2>My certificates</h2><p className="dashboard-description">Certificates are available after both stages and the final exam are complete.</p>{certificates.length ? <div className="certificate-list">{certificates.map((course) => <article className="certificate-mini" key={course.slug}><strong>{course.title}</strong><small>Completed {new Date(learningData[course.slug].certificate.completedAt).toLocaleDateString()}</small><small>ID: {learningData[course.slug].certificate.id}</small><Link className="text-link" href={`/certificates/${course.slug}`}>View certificate →</Link></article>)}</div> : <span className="coming-label">Complete both stages and pass a final exam to earn your first certificate.</span>}</section>
-        <section className="dashboard-panel career-panel"><div className="side-title-icon peach-icon"><Icon name="career" /></div><p className="dashboard-kicker">YOUR NEXT CHAPTER</p><h2>Turn your skills into opportunities</h2><p className="dashboard-description">Build towards your career goals with skill resources and job links.</p><Link href="/skills" className="btn btn-soft">Explore job links by skill</Link><p><Link href="/resume" className="text-link">Build my résumé →</Link></p></section>
+        <section className="dashboard-panel career-panel"><div className="side-title-icon peach-icon"><Icon name="career" /></div><p className="dashboard-kicker">YOUR NEXT CHAPTER</p><h2>Turn your skills into opportunities</h2><p className="dashboard-description">Build towards your career goals with skill resources and job links.</p><Link href="/skills" className="btn btn-soft">Explore job links by skill</Link><p><Link href="/resume" className="text-link">Build my résumé →</Link></p><p><Link href="/portfolio" className="text-link">Build my portfolio →</Link></p></section>
       </aside>
     </div>
     <p className="dashboard-storage-note">Your learning progress is currently saved in this browser on this device. It does not yet sync across devices.</p>

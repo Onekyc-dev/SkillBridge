@@ -536,189 +536,24 @@ body {
   .certificate-paper { box-shadow: none; break-inside: avoid; }
   .resume-page { max-width: none; }
 }
-/* SkillBridge branded sign-in page */
-.signin-page {
-  width: 100%;
-  max-width: 1080px;
-  margin: 1.25rem auto 2.5rem;
-}
-.signin-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
-  overflow: hidden;
-  min-height: 570px;
-  background: #fff;
-  border: 1px solid #DDE8DF;
-  border-radius: 28px;
-  box-shadow: 0 22px 65px rgba(20, 58, 37, .10);
-}
-.signin-visual {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: 570px;
-  overflow: hidden;
-  background: #F1EAF8;
-}
-.signin-hero-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.signin-visual-copy {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 2rem 2.1rem 2.25rem;
-  color: #123B2A;
-  background: linear-gradient(0deg, rgba(248, 252, 246, .98), rgba(248, 252, 246, .86) 70%, rgba(248, 252, 246, 0));
-}
-.signin-kicker {
-  display: inline-block;
-  margin-bottom: .7rem;
-  color: #147344;
-  font-size: .72rem;
-  font-weight: 900;
-  letter-spacing: .13em;
-}
-.signin-visual-copy h1 {
-  max-width: 15ch;
-  margin: 0 0 .65rem;
-  color: #123B2A;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  line-height: 1.05;
-}
-.signin-visual-copy p {
-  max-width: 40ch;
-  margin: 0;
-  color: #456454;
-  font-size: 1rem;
-}
-.signin-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(2rem, 5vw, 3.5rem);
-  background: #fff;
-}
-.signin-brand {
-  margin-bottom: 3.4rem;
-  color: #0E5A33;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: 1.65rem;
-  font-weight: 900;
-  letter-spacing: -.06em;
-}
-.signin-brand span { color: #1E9B57; }
-.signin-welcome {
-  margin-bottom: .65rem;
-  color: #1E9B57;
-  font-size: .75rem;
-  font-weight: 900;
-  letter-spacing: .14em;
-}
-.signin-panel h2 {
-  margin: 0 0 .7rem;
-  color: #14261B;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.35rem);
-  line-height: 1.12;
-}
-.signin-description {
-  margin: 0 0 2rem;
-  color: #5B6F63;
-  font-size: 1rem;
-}
-.signin-google-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .8rem;
-  width: 100%;
-  min-height: 58px;
-  padding: .85rem 1rem;
-  border: 1px solid #D6E2D9;
-  border-radius: 15px;
-  background: #fff;
-  color: #173D2A;
-  font: 800 1rem var(--font-body), system-ui, sans-serif;
-  cursor: pointer;
-  box-shadow: 0 5px 16px rgba(20, 58, 37, .06);
-  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
-}
-.signin-google-button:hover:not(:disabled) {
-  border-color: #1E9B57;
-  box-shadow: 0 9px 22px rgba(20, 58, 37, .11);
-  transform: translateY(-1px);
-}
-.signin-google-button:focus-visible {
-  outline: 3px solid #FFD166;
-  outline-offset: 3px;
-}
-.signin-google-button:disabled { opacity: .7; cursor: wait; }
-.google-mark { width: 21px; height: 21px; flex: none; }
-.signin-button-arrow { margin-left: auto; color: #1E9B57; font-size: 1.2rem; }
-.signin-divider {
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  margin: 1.8rem 0 1rem;
-  color: #819187;
-  font-size: .78rem;
-  white-space: nowrap;
-}
-.signin-divider::before, .signin-divider::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: #E6EEE8;
-}
-.signin-small-print, .signin-help {
-  margin: 0;
-  color: #748379;
-  font-size: .82rem;
-  line-height: 1.55;
-}
-.signin-help { margin-top: 1.25rem; color: #456454; }
-.signin-loading {
-  min-height: 420px;
-  display: grid;
-  place-items: center;
-  color: #5B6F63;
-}
-@media (max-width: 760px) {
-  .signin-page { margin: .5rem auto 1.5rem; }
-  .signin-card { grid-template-columns: 1fr; border-radius: 22px; }
-  .signin-visual { min-height: 300px; }
-  .signin-visual-copy { padding: 1.5rem 1.4rem 1.6rem; }
-  .signin-visual-copy h1 { font-size: 2rem; }
-  .signin-panel { padding: 2rem 1.4rem 2.2rem; }
-  .signin-brand { margin-bottom: 2rem; }
-}
 
-/* Learner onboarding and profile preferences */
-.learner-setup { max-width: 900px; margin: 34px auto 64px; }
-.learner-setup-intro { padding: 30px; border-radius: 26px; background: linear-gradient(135deg, #e9f8ef, #fff5dc); margin-bottom: 22px; }
-.setup-kicker { display: inline-block; color: #167346; font-size: .76rem; font-weight: 900; letter-spacing: .12em; margin-bottom: 10px; }
-.learner-setup-intro h1 { margin: 0 0 10px; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; }
-.learner-setup-intro p { margin: 0 0 14px; color: #52675b; font-size: 1.05rem; }
-.setup-optional { display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.8); color: #315c43; font-size: .86rem; font-weight: 700; }
-.learner-questions { display: grid; gap: 16px; }
-.learner-question { min-width: 0; margin: 0; padding: 22px; border: 1px solid #dce9df; border-radius: 22px; background: #fff; }
-.learner-question legend { width: 100%; padding: 0 0 16px; font-size: 1.12rem; font-weight: 900; color: #183b29; }
-.learner-question legend > span { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: 10px; border-radius: 50%; background: #e4f5e9; color: #167346; font-size: .9rem; }
-.learner-options { display: flex; flex-wrap: wrap; gap: 10px; }
-.learner-option { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid #dce6df; border-radius: 14px; background: #fbfdfb; color: #294536; cursor: pointer; font-weight: 700; }
-.learner-option input { accent-color: #16834a; }
-.learner-option.selected { border-color: #29965b; background: #eaf8ef; color: #145c35; }
-.clear-answer { margin-top: 12px; padding: 4px 0; border: 0; background: transparent; color: #62766a; text-decoration: underline; cursor: pointer; font-size: .86rem; }
-.learner-setup-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 22px; }
-.setup-primary { min-height: 50px; padding: 0 22px; border: 0; border-radius: 15px; background: #16834a; color: #fff; font-weight: 900; cursor: pointer; }
-.setup-primary:disabled, .setup-skip:disabled { opacity: .6; cursor: wait; }
-.setup-skip { padding: 12px 4px; border: 0; background: transparent; color: #53685b; font-weight: 800; cursor: pointer; }
-.setup-privacy-note, .profile-loading { margin-top: 16px; color: #718076; font-size: .86rem; }
-@media (max-width: 600px) { .learner-setup { margin: 18px auto 42px; } .learner-setup-intro { padding: 22px; border-radius: 20px; } .learner-question { padding: 18px; } .learner-options { display: grid; grid-template-columns: 1fr; } .learner-option { width: 100%; } .setup-primary { width: 100%; } }
+
+/* Batch 3: learner activity timeline */
+.activity-panel { margin-top: 1.1rem; }
+.activity-list { display: grid; gap: .2rem; }
+.activity-row { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto; align-items: center; gap: .8rem; padding: .85rem .15rem; color: inherit; text-decoration: none; border-bottom: 1px solid #E7EDE6; }
+.activity-row:last-child { border-bottom: 0; }
+.activity-row:hover .activity-copy strong { color: #1C7045; }
+.activity-dot { width: 10px; height: 10px; border-radius: 50%; background: #62A982; box-shadow: 0 0 0 4px #EAF4EC; }
+.activity-copy { min-width: 0; display: grid; gap: .22rem; }
+.activity-copy strong { overflow-wrap: anywhere; }
+.activity-copy small { color: #637368; font-size: .82rem; }
+.activity-copy .activity-date { color: #829087; font-size: .76rem; }
+.activity-open { color: #28734B; font-size: .82rem; font-weight: 800; white-space: nowrap; }
+.activity-empty { padding: 1rem; border-radius: 14px; background: #F5F8F2; }
+.activity-empty h3 { margin: 0 0 .3rem; }
+.activity-empty p { margin: 0 0 .65rem; color: #637368; }
+@media (max-width: 560px) {
+  .activity-row { grid-template-columns: 10px minmax(0, 1fr); }
+  .activity-open { display: none; }
+}
