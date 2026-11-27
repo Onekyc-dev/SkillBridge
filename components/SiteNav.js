@@ -32,6 +32,7 @@ export default function SiteNav({ categories }) {
         <Link href="/" className="nav-link" onClick={close}>Home</Link>
         <Link href="/dashboard" className="nav-link" onClick={close}>My dashboard</Link>
         <Link href="/my-courses" className="nav-link" onClick={close}>My courses</Link>
+        <Link href="/profile" className="nav-link" onClick={close}>My learning preferences</Link>
         <Link href="/resume" className="nav-link" onClick={close}>My résumé</Link>
         <div className="has-sub">
           <button type="button" className="nav-link sub-btn" aria-expanded={sub} onClick={() => setSub(!sub)}>
